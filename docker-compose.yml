@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+  checking_visited_links:
+    build: .
+    container_name: checking_visited_links
+    environment:
+      DATABASE_URL: "sqlite:///db.sqlite"
+      DEBUG: "False"
+    volumes:
+      - ./db.sqlite:/code/db.sqlite
+    networks:
+      - docker-network
+    ports:
+      - "8000:8000"
+  redis:
+    image: redis:alpine
+  autotests:
+    build: .
+    container_name: checking_visited_links.autotests
+    command: pipenv run pytest -x
+    environment:
+      DATABASE_URL: "sqlite:///test_db.sqlite"
+      DEBUG: "False"
+      DJANGO_SETTINGS_MODULE: "checking_visited_links.settings"
+    networks:
+      - docker-network
+
+networks:
+  docker-network:
+    driver: bridge
