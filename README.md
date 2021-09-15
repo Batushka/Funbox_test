@@ -19,19 +19,15 @@
 ### Запуск
 
 1. Перейти в основную директорию проекта
-2. Загрузить pipenv с помощью pip и установить зависимости
+2. Загрузить pipenv с помощью pip, запустить оболочку pipenv и установить необходимые пакеты
 ```bash
-pip install pipenv && pipenv install
+pip install pipenv && pipenv shell && pipenv install
 ```
-3. Запустить оболочку pipenv
+3. Запустить сервер
 ```bash
-pipenv shell
+python manage.py runserver 127.0.0.1:8000
 ```
-4. Запустить сервер
-```bash
-python3 manage.py runserver 127.0.0.1:8000
-```
-5. Запустить тесты
+4. Запустить тесты
 ```bash
 pytest -x
 ```
